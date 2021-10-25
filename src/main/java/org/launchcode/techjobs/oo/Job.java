@@ -35,15 +35,40 @@ public class Job {
     //  match.
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Job)) return false;
+        Job job = (Job) o;
+        return getId() == job.getId();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId());
+    }
+
+    @Override
     public String toString() {
-        return "Job{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", employer=" + employer +
-                ", location=" + location +
-                ", positionType=" + positionType +
-                ", coreCompetency=" + coreCompetency +
-                '}';
+        String notAvail = "Data not available";
+        if (name == null || name == ""){
+            name = notAvail;
+        } if (employer == null || employer.getValue() == "") {
+            employer.setValue(notAvail);
+        } if (location == null || location.getValue() == "") {
+        location.setValue(notAvail);
+        } if (positionType == null || positionType.getValue() == "") {
+            positionType.setValue(notAvail);
+        } if (coreCompetency == null || coreCompetency.getValue() == "") {
+            coreCompetency.setValue(notAvail);
+        }
+        return '\n' +
+                "ID: " + id + '\n' +
+                "Name: " + name + '\n' +
+                "Employer: " + employer + '\n' +
+                "Location: " + location + '\n' +
+                "Position Type: " + positionType + '\n' +
+                "Core Competency: " + coreCompetency + '\n';
+
     }
 
 
